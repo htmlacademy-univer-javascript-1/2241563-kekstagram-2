@@ -1,18 +1,4 @@
-function getRandomInt(from, to){
-  if (from < 0 || to < 0){
-    throw new RangeError('Числа в диапазоне должны быть положительными');
-  }
-
-  if (from === to) {
-    return from;
-  }
-  if (from > to){
-    [from, to] = [to, from];
-  }
-
-  return Math.round(Math.random() * (to - from) + from);
+function truncate(str, maxlength) {
+  return (str.length > maxlength) ?
+    str.slice(0, maxlength - 1) + '…' : str;
 }
-
-const isCorrectLength = (str, maxLength) => str.length <= maxLength;
-
-export {getRandomInt, isCorrectLength}; // для того чтобы линтер не ругался
