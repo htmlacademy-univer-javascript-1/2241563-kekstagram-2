@@ -1,8 +1,8 @@
-import {getRandomInt} from './util';
+import { getRandomInt } from './util';
 
 const PHOTOS_COUNT = 25;
 const NAMES = ['Дима', 'Олежа', 'Дементий', 'Егор', 'Эдик'];
-const DESCRIPTIONS = Array.from({length: PHOTOS_COUNT}, (_, i) => `Описание ${i}`);
+const DESCRIPTIONS = Array.from({ length: PHOTOS_COUNT }, (_, i) => `Описание ${i}`);
 const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -11,6 +11,7 @@ const MESSAGES = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
+
 const COMMENT_IDS = [];
 
 const getRandomLikes = () => getRandomInt(15, 200);
@@ -44,7 +45,7 @@ function generateComment() {
 }
 
 function generateDescription() {
-  const comments = Array.from({length: getRandomInt(0, 3)}, generateComment);
+  const comments = Array.from({ length: getRandomInt(0, 3) }, generateComment);
   const id = getId();
   return {
     id: id,
@@ -55,4 +56,4 @@ function generateDescription() {
   };
 }
 
-export {generateDescription, PHOTOS_COUNT};
+export { generateDescription, PHOTOS_COUNT };
