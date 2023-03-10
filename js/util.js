@@ -14,3 +14,4 @@ export function getRandomInt(from, to) {
 }
 
 export const isCorrectLength = (str, maxLength) => str.length <= maxLength;
+
