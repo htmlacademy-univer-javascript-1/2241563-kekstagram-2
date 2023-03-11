@@ -1,9 +1,9 @@
-import {getRandomInt} from './util';
+import { getRandomInt } from './util.js';
 
-const PHOTOS_COUNT = 25;
-const NAMES = ['Дима', 'Олежа', 'Дементий', 'Егор', 'Эдик'];
-const DESCRIPTIONS = Array.from({length: PHOTOS_COUNT}, (_, i) => `Описание ${i}`);
-const MESSAGES = [
+const count_photo = 25;
+const names = ['Дима', 'Олежа', 'Дементий', 'Егор', 'Эдик'];
+const description = Array.from({ length: count_photo }, (_, i) => `Описание ${i}`);
+const message = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -22,6 +22,32 @@ const getId = (() => {
   return () => id++;
 })();
 
+function generateDescription() {
+  const comments = Array.from({ length: getRandomInt(0, 3) }, generateComment);
+  const id = getId();
+  return {
+    id: id,
+    url: `photos/${id}.jpg`,
+    description: description[id - 1],
+    likes: getRandomLikes(),
+    comments: comments
+  };
+}
+
+function generateComment() {
+  const messageTexts = [];
+  for (let i = 0; i < getRandomInt(1, 2); i++) {
+    messageTexts.push(getRandomElement(message));
+  }
+  return {
+    id: getCommentId(),
+    avatar: `img/avatar-${getRandomInt(1, 6)}.svg`,
+    message: messageTexts.join(' '),
+    name: getRandomElement(names
+    )
+  };
+}
+
 function getCommentId() {
   let id = getRandomInt(1, 1000);
   while (COMMENT_IDS.includes(id)) {
@@ -30,29 +56,4 @@ function getCommentId() {
   return id;
 }
 
-function generateComment() {
-  const messageTexts = [];
-  for (let i = 0; i < getRandomInt(1, 2); i++) {
-    messageTexts.push(getRandomElement(MESSAGES));
-  }
-  return {
-    id: getCommentId(),
-    avatar: `img/avatar-${getRandomInt(1, 6)}.svg`,
-    message: messageTexts.join(' '),
-    name: getRandomElement(NAMES)
-  };
-}
-
-function generateDescription() {
-  const comments = Array.from({length: getRandomInt(0, 3)}, generateComment);
-  const id = getId();
-  return {
-    id: id,
-    url: `photos/${id}.jpg`,
-    description: DESCRIPTIONS[id - 1],
-    likes: getRandomLikes(),
-    comments: comments
-  };
-}
-
-export {generateDescription, PHOTOS_COUNT};
+export { generateDescription, count_photo };
